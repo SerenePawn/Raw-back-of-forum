@@ -1,0 +1,14 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+
+{% block head %}
+    <script type="text/javascript" src={% static 'js/jquery.js' %}></script>
+    <script type="text/javascript" src={% static 'js/testscript.js' %}></script>
+{% endblock %}
+
+
+{% block content %}
+    <input type="text" class="field" placeholder="Input der de wei">
+    <input type="button" class='btn' value="*clack*">
+    <h1 class="result"></h1>
+{% endblock %}

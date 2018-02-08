@@ -1,0 +1,30 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}{{ topic.topic_header }}{% endblock %}
+
+{% block content %}
+    <h1>{{ topic.topic_header }}</h1><hr>
+    <pre>{{ topic.topic_text }}</pre><hr>
+    <p>{{ topic.topic_rate_plus }} <a href="addlike/{{ topic.id }}">Like </a>
+        {{ topic.topic_rate_minus }}<a href="adddislike/{{ topic.id }}">Dislike </a></p>
+    <hr>
+    {% if user.is_authenticated %}
+        <div class="commentContainerW">
+            <form action="{% url 'add_comment' topic.id %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="button" value="Отправить">
+            </form>
+        </div>
+    {% else %}
+        <p class="error">Для отправки комментариев требуется авторизация</p>
+    {% endif %}
+    {% for comment in comments %}
+        <div class="commentContainerR">
+            <a class="user" href="/view/{{ comment.comments_by }}">{{ comment.comments_by }}</a>
+            <p>{{ comment.comments_text }}</p>
+            <p><strong>{{ comment.comments_pub_date }}</strong></p>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock %}

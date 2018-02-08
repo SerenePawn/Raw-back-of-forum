@@ -1,0 +1,11 @@
+<form action="/login" method="post">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+    <input class="button" type="submit" value="Enter">
+
+</form>
+<a href="/register">Registration</a>
+{% if login_error %}<p class="error">{{ login_error }}</p>{% endif %}

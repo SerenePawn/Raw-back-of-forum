@@ -1,0 +1,30 @@
+{% extends 'forum/base.html' %}
+{% load static %}
+
+{% block head %}
+    <script type="text/javascript" src={% static 'js/jquery.js' %}></script>
+    <script type="text/javascript" src={% static 'js/index_script.js' %}></script>
+{% endblock %}
+
+{% block content %}
+    <tr>
+    <table class="indextable">
+        <tbody>
+            {% for topic in topics %}
+                <tr>
+                    <td class="header">
+                        <h2 class="topic" id="{{ topic.id }}">{{ topic.topic_header }}</h2>
+                        <img src="{{ topic.topic_pic.url }}" alt="No icon" width="100" height="100">
+                    </td>
+                    <td class="rate"><p>{{ topic.topic_rate_plus }} Likes |
+                        {{ topic.topic_rate_minus }} Dislikes </p>
+                    </td>
+                    <td class="count">
+                        {{ topic.topiccomments_set.count }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </tr>
+{% endblock %}

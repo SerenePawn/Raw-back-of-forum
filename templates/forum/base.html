@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Default title{% endblock %}</title>
+    <link href="{% block style %}{% static 'css/style.css' %}{% endblock %}" rel="stylesheet">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+<header><h1><strong>The forum. Welcome. Again.</strong></h1></header>
+
+<div class="userpanel">
+    <a href="/" class="messages">To home</a>
+
+    {% if user.username %}
+        <a href="/messages" class="messages">| Мои сообщения</a>
+        <a href="/logout" class="login">Выйти ({{ user.username }})</a>
+    {% else %}
+        <a href="/login" class="login">Войти</a>
+    {% endif %}
+    {% if user.is_superuser %}
+        <a href="/admin" class="messages">Admin-panel</a>
+    {% endif %}
+</div>
+<hr>
+<main>
+    {% block content %}<p>Some... </p><h2>BODY ONCE TOLD ME DE WORLD IS GONNA ROLL ME</h2>{% endblock %}
+</main>
+</body>
+</html>

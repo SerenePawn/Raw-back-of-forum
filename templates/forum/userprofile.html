@@ -1,0 +1,16 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+    <h4>{{ userview.username }} | ID: {{ userview.id }}</h4>
+    <p>Кол-во комментариев: {{ userview.topiccomments_set.count }}</p>
+    <p>Почта: {{ userview.email }}</p>
+    <p>Последний раз был: {{ userview.last_login }}</p>
+    <p>Зарегистрирован: {{ userview.date_joined }}</p>
+    <form action="{% url 'private_messages_new' %}" method="post">{% csrf_token %}
+        <input type="submit" class="btn" value="Написать">
+    </form>
+
+    {% if userview.id == req.user.id or req.user.is_superuser %}
+    <p style="color: darkgreen">Hello... Its me...</p>
+    {% endif %}
+{% endblock %}

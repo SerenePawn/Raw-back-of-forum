@@ -1,0 +1,13 @@
+{% extends "forum/base.html" %}
+
+{% block content %}
+    <div class="row">
+        <h2>Личные сообщения</h2>
+
+        {% block pm_menu %}{% endblock %}
+
+        <div class="span-20">
+            {% block pm_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

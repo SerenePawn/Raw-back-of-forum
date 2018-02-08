@@ -1,0 +1,43 @@
+{% extends "forum/dialog/base.html" %}
+
+{% block pm_menu %}
+    <ul class="nav nav-tabs">
+        <li><a href="{% url 'private_messages' %}">Личные сообщения</a></li>
+        <li class="active"><a href="{% url 'private_messages_new' %}">Написать</a></li>
+    </ul>
+{% endblock %}
+
+{% block pm_content %}
+    {% if pm_form.errors %}
+        <div class="alert alert-error">
+            {{ pm_form.errors }}
+        </div>
+    {% endif %}
+
+    <form action="{% url 'private_messages_new' %}" method="post" class="form-horizontal">{% csrf_token %}
+        <fieldset>
+            <div class="control-group">
+                <label class="control-label" for="id_recipient">Кому:</label>
+                <div class="controls">
+                    {{ pm_form.recipient }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="id_subject">Тема сообщения:</label>
+                <div class="controls">
+                    {{ pm_form.subject }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="id_body">Текст:</label>
+                <div class="controls">
+                    {{ pm_form.text }}
+                </div>
+            </div>
+        </fieldset>
+        
+        <input type="submit" class="btn" value="Отправить">
+    </form>
+{% endblock %}
